@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="3155 Project Group 18">
+        <title>Contact Us</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='head_nav.css') }}">
+        <link rel="stylesheet" href=head_nav.css>
+    </head>
+    <body>
+
+        <h1>Contact Us</h1>
+        <bar><nav>
+            <a href="{{ url_for('index') }}"> Home</a> ||
+            <a href="{{ url_for('get_events') }}"> Events</a> ||
+            {% if user %}
+            <a href="{{ url_for('get_users_events') }}"> Your Events</a> ||
+            {% endif %}
+            <a href="{{ url_for('contact_us') }}"> Contact Us</a> ||
+            <a href="{{ url_for('about_us') }}"> About Us</a> ||
+            <a href="{{ url_for('rsvp_page') }}"> RSVP</a> ||
+        </nav></bar>
+        {% if user %}
+        <register>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </register>
+        {% else %}
+        <register>
+            <a href="{{ url_for('register') }}"> Register</a>
+            <a href="{{ url_for('login') }}"> Log-in</a>
+        </register>
+        {% endif %}
+
+        <main>
+            <p>If you need any assistance or have any concerns, you can contact us at 555-555-5555.</p>
+            <p>Our email is FakeCompSciDepartment@uncc.edu</p>
+            <p>We are always willing to help. You can reach us within our business hours.</p>
+            <p>Monday-Friday 8pm-5am</p>
+            <a href ="https://www.uncc.edu/">If you click this link, this will take you to our location.</a>
+        </main>
+    </body>
+</html>

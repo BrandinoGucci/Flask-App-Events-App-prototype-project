@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='head_nav.css') }}">
+
+    </head>
+    <body>
+
+        <h1>Event {{ event.id }}</h1>
+        <bar><nav>
+            <a href="{{ url_for('index') }}"> Home</a> ||
+            <a href="{{ url_for('get_events') }}"> Events</a> ||
+            {% if user %}
+            <a href="{{ url_for('get_users_events') }}"> Your Events</a> ||
+            {% endif %}
+            <a href="{{ url_for('contact_us') }}"> Contact Us</a> ||
+            <a href="{{ url_for('about_us') }}"> About Us</a> ||
+            <a href="{{ url_for('rsvp_page') }}"> RSVP</a> ||
+        </nav></bar>
+        {% if user %}
+        <register>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </register>
+        {% else %}
+        <register>
+            <a href="{{ url_for('register') }}"> Register</a>
+            <a href="{{ url_for('login') }}"> Log-in</a>
+        </register>
+        {% endif %}
+        <main>
+            <table>
+            <tr>
+                <th>Title</th>
+                <td>{{ event.name }}</td>
+
+
+            </tr>
+            <tr>
+                <th>Info</th>
+                <td>{{ event.info }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ event.date }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ event.location }}</td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>{{ event.tags }}</td>
+            </tr>
+        </table>
+        {% if event.rsvp %}
+            {% if event.rsvp|length > 0 %}
+                <h2>RSVP's</h2>
+                <ul>
+                {% for attendance in event.rsvp %}
+                    <li>{{ attendance.user_name }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endif %}
+            <p>Want to RSVP? <a href="{{ url_for('rsvp', event_id=event.id) }}" methods="GET">Click Here!</a></p>
+            <br>
+            <br>
+            {% if event.ratings %}
+                <p>Ratings</p>
+                {% for rating in event.rating %}
+                    {% if rating.average %}
+                        <p>{{ rating.average }}</p>
+                    {% endif %}
+                {% endfor %}
+
+
+        {% endif %}
+        <form action="{{ url_for('rate', event_id=event.id) }}" method="POST">
+            <div class="formwrapper">
+                    <p>Rate from 1 - 10</p>
+                        <div class="form-field">
+                            {{ form.rating.label }} <br/> {{ form.rating }}
+                        </div>
+                    {{ form.submit }}
+                </div>
+        </form>
+
+        </main>
+    </body>
+</html>
