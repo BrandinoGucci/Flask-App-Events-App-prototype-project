@@ -1,0 +1,64 @@
+/* CSS for the tabs */
+h1 {
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    background-color: limegreen;
+    color: ghostwhite;
+    padding-top: 5%;
+    margin-top: -4%;
+    padding-bottom: 0.3%;
+}
+bar {
+    overflow: hidden;
+    background-color: limegreen;
+    display: flex;
+    justify-content: center;
+    transform: translate(0, -50%);
+}
+/* CSS for the tabs  */
+nav a {
+    display: inline-block;
+    color: ghostwhite;
+    text-align: center;
+    padding: 18px 20px;
+    text-decoration: ghostwhite;
+    cursor: pointer;
+}
+/* CSS for when the user hovers over the tabs */
+nav a:hover {
+    background-color: #ffde5a;
+}
+register{
+    position: relative;
+}
+
+register a{
+    position: relative;
+    background-color: grey;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    top: -120px;
+    left: 5px;
+}
+
+register a:hover {
+    opacity: 0.8;
+}
+
+html{
+    background: url("logo.jpg") top left repeat-y,
+                url("logo.jpg") top right repeat-y;
+    background-size: 250px;
+}
+
+main{
+    padding: 0 250px;
+}
+
+th, td {
+    padding: 5px;
+}

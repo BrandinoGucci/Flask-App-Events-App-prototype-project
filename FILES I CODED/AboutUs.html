@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='head_nav.css') }}">
+        <link rel="stylesheet" href=head_nav.css>
+    </head>
+    <body>
+        <h1>About Us</h1>
+        <bar><nav>
+            <a href="{{ url_for('index') }}"> Home</a> ||
+            <a href="{{ url_for('get_events') }}"> Events</a> ||
+            {% if user %}
+            <a href="{{ url_for('get_users_events') }}"> Your Events</a> ||
+            {% endif %}
+            <a href="{{ url_for('contact_us') }}"> Contact Us</a> ||
+            <a href="{{ url_for('about_us') }}"> About Us</a> ||
+            <a href="{{ url_for('rsvp_page') }}"> RSVP</a> ||
+        </nav></bar>
+        {% if user %}
+        <register>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </register>
+        {% else %}
+        <register>
+            <a href="{{ url_for('register') }}"> Register</a>
+            <a href="{{ url_for('login') }}"> Log-in</a>
+        </register>
+        {% endif %}
+        <main>
+            <p>We created this website so users can keep track of events that they want to go to and also gives event organizers
+                to showcase their events that they have created.</p>
+            <p>We also created features so that users can RSVP for future events that we have posted.</p>
+        </main>
+    </body>
+</html>
