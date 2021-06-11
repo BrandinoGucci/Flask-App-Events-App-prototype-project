@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='head_nav.css') }}">
+    </head>
+    <body>
+        {% if event %}
+            <h1>Edit Event</h1>
+        {% else %}
+            <h1>New Event</h1>
+        {% endif %}
+
+        <bar><nav>
+            <a href="{{ url_for('index') }}"> Home</a> ||
+            <a href="{{ url_for('get_events') }}"> Events</a> ||
+            {% if user %}
+            <a href="{{ url_for('get_users_events') }}"> Your Events</a> ||
+            {% endif %}
+            <a href="{{ url_for('contact_us') }}"> Contact Us</a> ||
+            <a href="{{ url_for('about_us') }}"> About Us</a> ||
+            <a href="{{ url_for('rsvp_page') }}"> RSVP</a> ||
+        </nav></bar>
+        {% if user %}
+        <register>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </register>
+        {% else %}
+        <register>
+            <a href="{{ url_for('register') }}"> Register</a>
+            <a href="{{ url_for('login') }}"> Log-in</a>
+        </register>
+        {% endif %}
+
+        <main>
+            {% if event %}
+                <form action="{{ url_for('update_event', event_id=event.id) }}" method="post">
+            {% else %}
+                <form action="new" method="post">
+            {% endif %}
+                <p><label>Title </label></p>
+                <p><input type="text" name="title" value = "{% if event %}{{event.name}} {% endif %}"
+                          placeholder="Title"/></p>
+                <p><label>Event </label></p>
+                <p>
+                    {% if event %}
+                        <textarea name="eventInfo"  rows="6" cols="0" placeholder="Add your new event info here ...">{{ event.info }}</textarea>
+                    {% else %}
+                        <textarea name="eventInfo"  rows="6" cols="0" placeholder="Add your new event info here ..."></textarea>
+                    {% endif %}
+                </p>
+                <p><label>Location</label></p>
+                <p><input type="text" name="location" value = "{% if event %}{{event.location}} {% endif %}"
+                          placeholder="Location"/></p>
+                <p><label>Date</label></p>
+                <p><input type="datetime-local" name="date" value = "{% if event %}{{event.date}} {% endif %}"/></p>
+                <p><label>Tags</label></p>
+                <p><input type="text" name="tags" value="{% if event %}{{event.tags}},{% endif %}" style="width:500px"
+                          placeholder="each tag should be separated with a comma &quot,&quot and no spaces"/></p>
+
+                    {% if event %}
+                    <button><a href="{{ url_for('get_users_events') }}" style="overflow:hidden">Go back</a></button><br>
+                    <input type="submit" value="Update Event"/></p>
+                    {% else %}
+                    <input type="submit" value="Add Event"/>
+                    {% endif %}
+                </p>
+            </form>
+        </main>
+    </body>
+</html>
