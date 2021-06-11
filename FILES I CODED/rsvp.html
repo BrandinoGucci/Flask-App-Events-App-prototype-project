@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='head_nav.css') }}">
+        <link rel="stylesheet" href=head_nav.css>
+    </head>
+    <body>
+
+        <h1>Your RSVP's</h1>
+        <bar><nav>
+            <a href="{{ url_for('index') }}"> Home</a> ||
+            <a href="{{ url_for('get_events') }}"> Events</a> ||
+            {% if user %}
+            <a href="{{ url_for('get_users_events') }}"> Your Events</a> ||
+            {% endif %}
+            <a href="{{ url_for('contact_us') }}"> Contact Us</a> ||
+            <a href="{{ url_for('about_us') }}"> About Us</a> ||
+            <a href="{{ url_for('rsvp_page') }}"> RSVP</a> ||
+        </nav></bar>
+        {% if user %}
+        <register>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </register>
+        {% else %}
+        <register>
+            <a href="{{ url_for('register') }}"> Register</a>
+            <a href="{{ url_for('login') }}"> Log-in</a>
+        </register>
+        {% endif %}
+
+
+        <main>
+            <form action="{{ url_for('rsvp', event_id=event_id) }}" method="POST">
+                <div class="formwrapper">
+                    <h2 class="title">Add a name for your RSVP</h2>
+                        <div class="form-field">
+                            {{ form.user_name.label }} <br/> {{ form.user_name }}
+                        </div>
+                    {{ form.submit }}
+                </div>
+            </form>
+        </main>
+
+    </body>
+</html>
