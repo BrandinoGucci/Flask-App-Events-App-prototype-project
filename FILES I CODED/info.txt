@@ -1,0 +1,1 @@
+Uses flask-app, sqlalchemy, bcrypt, wtforms
